@@ -2,7 +2,7 @@
 import React from 'react'
 import './UserTable.css';
 
-const UserTable = () => {
+const UserTable = props => {
     return (
         <table>
             <thead>
@@ -14,7 +14,7 @@ const UserTable = () => {
             </thead>
             <tbody>
                 <tr>
-                    <td>Elmer</td>
+                    <td>props.userName</td>
                     <td>ElmerGama</td>
                     <td>
                         <button className='button-styles'>Delete</button>
