@@ -12,17 +12,25 @@ function App() {
     { id: 4, name: "Ricardo", userName: "Ricardo1"},
     { id: 5, name: "Jhoao", userName: "Jhoao1"},
   ];
-  const initialFormState = { id: null, name: "", userName: ""};
+  const initialformstate = { id: null, name: '', username: '' };
 
-  const [users, setUsers] = useState(usersData); //estado de los usuarios
-  
-  const [currentUser, setCurrenUser] = useState(initialFormState);  
-  
+  const [users, setUsers] = useState(usersData);
+
+  const [CurrentUser, setCurrentUser] = useState(initialformstate);
+
+ // Función para eliminar un usuario
+ const deleteUser = (id) => {
+  // Filtrar la lista de usuarios y remover el usuario con el id correspondiente
+  const updatedUsers = users.filter(user => user.id !== id);
+  setUsers(updatedUsers);
+};
+
   return (
-    <div>
+    <div className="App">
       <h1>CRUD DE USUARIOS</h1>
       <UserTable
-        currentUser={currentUser}
+      users={users}
+      deleteUser={deleteUser}
       />
     </div>
   );

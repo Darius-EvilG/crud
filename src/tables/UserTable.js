@@ -1,28 +1,31 @@
-
 import React from 'react'
 import './UserTable.css';
 
-const UserTable = props => {
-    return (
-        <table>
+const UserTable = ({ users, deleteUser }) => {
+  return (
+    <table>
+        <tr>
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>UserName</th>
+                    <th>Usuario</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>props.userName</td>
-                    <td>ElmerGama</td>
-                    <td>
-                        <button className='button-styles'>Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    )
+        {users.map(user => (
+          <tr key={user.id}>
+            <td>{user.name}</td>
+            <td>{user.username}</td>
+            <td>
+              <button className='button-styles'onClick={() => deleteUser(user.id)}>Delete</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+        </tr>
+    </table>
+  )
 }
 
 export default UserTable
