@@ -1,9 +1,12 @@
 import React from 'react'
 import './UserTable.css';
 
-const UserTable = ({ users, deleteUser }) => {
+const UserTable = ({ users, deleteUser, addUser }) => {
   return (
     <table>
+        <button>onClick={()=>addUser ({ name: "Jhoao", userName: "Jhoao1",})}
+          Add user
+        </button>
         <tr>
             <thead>
                 <tr>

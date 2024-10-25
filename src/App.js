@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import UserTable from './tables/UserTable';
 import { useState } from 'react';
+import NewUser from './tables/NewUser';
 
 function App() {
 
@@ -12,6 +13,11 @@ function App() {
     { id: 4, name: "Ricardo", userName: "Ricardo1"},
     { id: 5, name: "Jhoao", userName: "Jhoao1"},
   ];
+
+  const addUser = user => {
+    return usersData.push(user);
+    setUsers(...users, user);
+  };
   const initialformstate = { id: null, name: '', username: '' };
 
   const [users, setUsers] = useState(usersData);
@@ -28,11 +34,15 @@ function App() {
   return (
     <div className="App">
       <h1>CRUD DE USUARIOS</h1>
+      <h2>Añadir usuario</h2>
+      <NewUser
+      />
       <UserTable
       users={users}
       deleteUser={deleteUser}
+      addUser={addUser}
       />
-    </div>
+    </div> 
   );
 }
 
