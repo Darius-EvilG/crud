@@ -1,48 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-import UserTable from './tables/UserTable';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import NewUser from './tables/NewUser';
+import UserTable from './tables/UserTable';
 
 function App() {
+  const [users, setUsers] = useState([]);
 
-  const usersData = [
-    { id: 1, name: "Elmer", userName: "Elmer1"},
-    { id: 2, name: "Bryan", userName: "Bryan1"},
-    { id: 3, name: "Andres", userName: "Andres1"},
-    { id: 4, name: "Ricardo", userName: "Ricardo1"},
-    { id: 5, name: "Jhoao", userName: "Jhoao1"},
-  ];
-
-  const addUser = user => {
-    return usersData.push(user);
-    setUsers(...users, user);
+  const addUser = (user) => {
+    setUsers([...users, { ...user, id: Date.now() }]);
   };
-  const initialformstate = { id: null, name: '', username: '' };
 
-  const [users, setUsers] = useState(usersData);
+  const deleteUser = (id) => {
+    setUsers(users.filter((user) => user.id !== id));
+  };
 
-  const [CurrentUser, setCurrentUser] = useState(initialformstate);
-
- // Función para eliminar un usuario
- const deleteUser = (id) => {
-  // Filtrar la lista de usuarios y remover el usuario con el id correspondiente
-  const updatedUsers = users.filter(user => user.id !== id);
-  setUsers(updatedUsers);
-};
+  const updateUser = (id, updatedUser) => {
+    setUsers(users.map((user) => (user.id === id ? updatedUser : user)));
+  };
 
   return (
-    <div className="App">
-      <h1>CRUD DE USUARIOS</h1>
-      <h2>Añadir usuario</h2>
-      <NewUser
-      />
-      <UserTable
-      users={users}
-      deleteUser={deleteUser}
-      addUser={addUser}
-      />
-    </div> 
+    <div>
+      <h1>CRUD de Usuarios</h1>
+      <NewUser addUser={addUser} />
+      <UserTable users={users} deleteUser={deleteUser} updateUser={updateUser} />
+    </div>
   );
 }
 
